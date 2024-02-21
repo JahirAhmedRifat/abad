@@ -1,0 +1,46 @@
+
+---------------------------------------------------------------------------------------------------------------
+ private void insertActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/info", "root", "nclc123456");
+            PreparedStatement p = c1.prepareStatement("INSERT INTO product(id,name,price,stock,size,ex_date)"
+                    + " VALUES("+id.getText()+",'" + name.getText() + "'," + 
+                    price.getText() + "," + stock.getText() + ",'" + size.getText() + "','" + date.getText() + "')");
+            id.setText("");
+            name.setText("");
+            price.setText("");
+            stock.setText("");
+            size.setText("");
+            date.setText("");
+            p.executeUpdate();
+            
+            System.out.println(" Item added");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }                                      
+
+    private void showActionPerformed(java.awt.event.ActionEvent evt) {                                     
+
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/info", "root", "nclc123456");
+            PreparedStatement p = c1.prepareStatement("SELECT * FROM product"); 
+            ResultSet rs= p.executeQuery(); 
+            System.out.println("id"+" "+"name"+" price");
+             while (rs.next()) {
+                int x = rs.getInt(1);
+                String y = rs.getString(2);
+                double z = rs.getDouble(3);
+                int w = rs.getInt(4);
+                 String x1 = rs.getString(5);
+                 String xx = rs.getString(6);           
+                System.out.println(x + " " + y + " " + z+" "+w+" "+x1+" "+xx);
+            }          
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+
+    }
+------------------------------------------------------------------------------------------------------------------------------------------------
